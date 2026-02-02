@@ -2,10 +2,21 @@ import { useState } from "react";
 import lovesvg from "./assets/All You Need Is Love SVG Cut File.svg";
 import lovesvg2 from "./assets/Love In The Air SVG Cut File.svg";
 
+const GIFTS = [
+  { id: 1, title: "Gift 1", reveal: "movie date night" },
+  { id: 2, title: "Gift 2", reveal: "food and car ride" },
+  { id: 3, title: "Gift 3", reveal: "a BIG kiss" },
+];
+
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
+  const [revealedGifts, setRevealedGifts] = useState(new Set());
   const yesButtonSize = noCount * 20 + 16;
+
+  const revealGift = (id) => {
+    setRevealedGifts((prev) => new Set(prev).add(id));
+  };
 
   const handleNoClick = () => {
     setNoCount(noCount + 1);
@@ -31,7 +42,6 @@ export default function Page() {
       "You're breaking my heart ;(",
       "Is that your final answer?",
       "You're breaking my heart ;(",
-      "Plsss? :( You're breaking my heart",
     ];
 
     return phrases[Math.min(noCount, phrases.length - 1)];
@@ -44,6 +54,22 @@ export default function Page() {
           <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" />
           <div className="text-4xl md:text-6xl font-bold my-4">
             Ok Yayyyyy!!!
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 mt-6 px-4">
+            {GIFTS.map(({ id, title, reveal }) => (
+              <button
+                key={id}
+                onClick={() => revealGift(id)}
+                className="w-40 min-h-[100px] rounded-xl bg-rose-100 hover:bg-rose-200 border-2 border-rose-300 shadow-lg hover:shadow-xl transition-all flex flex-col items-center justify-center p-4 text-center"
+              >
+                <span className="font-bold text-rose-800 text-lg">{title}</span>
+                {revealedGifts.has(id) && (
+                  <span className="text-rose-600 font-medium mt-2 text-sm">
+                    {reveal}
+                  </span>
+                )}
+              </button>
+            ))}
           </div>
         </>
       ) : (
@@ -61,7 +87,7 @@ export default function Page() {
             src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.webp"
           />
           <h1 className="text-4xl md:text-6xl my-4 text-center">
-            Will you be my Valentine?
+            Nour, Will you be my Valentine?
           </h1>
           <div className="flex flex-wrap justify-center gap-2 items-center">
             <button
@@ -86,16 +112,5 @@ export default function Page() {
 }
 
 const Footer = () => {
-  return (
-    <a
-      className="fixed bottom-2 right-2 backdrop-blur-md opacity-80 hover:opacity-95 border p-1 rounded border-rose-300"
-      href="https://github.com/Xeven777/valentine"
-      target="__blank"
-    >
-      Made with{" "}
-      <span role="img" aria-label="heart">
-        ❤️
-      </span>
-    </a>
-  );
+  return 
 };

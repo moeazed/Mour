@@ -51,9 +51,9 @@ export default function Page() {
   };
 
   return (
-    <div className="overflow-hidden flex flex-col items-center justify-center pt-4 h-screen -mt-16 selection:bg-rose-600 selection:text-white text-zinc-900">
+    <div className="overflow-hidden flex flex-col items-center justify-center min-h-screen pt-4 pb-4 selection:bg-rose-600 selection:text-white text-zinc-900 relative">
       {yesPressed ? (
-        <>
+        <div className="flex flex-col items-center justify-center flex-1 w-full">
           <img
             src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif"
             className="mx-auto block"
@@ -78,11 +78,16 @@ export default function Page() {
               </button>
             ))}
           </div>
-        </>
+        </div>
       ) : (
         <>
-          <img src={bg1} alt="wallpaper" />
-
+          <img
+            src={bg1}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover object-center -z-10 opacity-30"
+          />
+          <div className="flex flex-col items-center justify-center flex-1 w-full relative z-0">
           <img
             src={lovesvg}
             className="fixed animate-pulse top-10 md:left-24 left-6 md:w-40 w-28"
@@ -113,6 +118,7 @@ export default function Page() {
             >
               {noCount === 0 ? "No" : getNoButtonText()}
             </button>
+          </div>
           </div>
         </>
       )}

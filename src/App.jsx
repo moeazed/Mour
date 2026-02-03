@@ -1,6 +1,9 @@
 import { useState } from "react";
 import lovesvg from "./assets/All You Need Is Love SVG Cut File.svg";
 import lovesvg2 from "./assets/Love In The Air SVG Cut File.svg";
+import bg1 from "./assets/bg1.webp";
+import bgAlt from "./assets/bg-1.webp";
+
 
 const GIFTS = [
   { id: 1, title: "Gift 1", reveal: "movie date night" },
@@ -74,6 +77,8 @@ export default function Page() {
         </>
       ) : (
         <>
+          <img src={bg1} alt="wallpaper" />
+
           <img
             src={lovesvg}
             className="fixed animate-pulse top-10 md:left-24 left-6 md:w-40 w-28"
